@@ -18,13 +18,13 @@ jobs:
           sudo add-apt-repository ppa:deadsnakes/ppa -y
           sudo apt update
           sudo apt install -y python3.11 python3.11-venv python3.11-dev
-          sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 10
-          sudo update-alternatives --set python3 /usr/bin/python3.11
-          sudo ln -sf /usr/bin/python3.11 /usr/bin/python
-          curl -sS https://bootstrap.pypa.io/get-pip.py | sudo python3
-          python3 --version
-          python --version
-          python3 -m pip --version
+          curl -sS https://bootstrap.pypa.io/get-pip.py | sudo python3.11
+          mkdir -p /home/runner/pybin
+          ln -sf /usr/bin/python3.11 /home/runner/pybin/python
+          ln -sf /usr/bin/python3.11 /home/runner/pybin/python3
+          echo "/home/runner/pybin" >> $GITHUB_PATH
+          /home/runner/pybin/python --version
+          /home/runner/pybin/python3 --version
 
       - name: Install system dependencies
         run: |
